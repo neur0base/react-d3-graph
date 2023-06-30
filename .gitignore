@@ -72,3 +72,4 @@ gen-docs
 cypress/videos/
 cypress/screenshots/
 yarn.lock
+.idea/
