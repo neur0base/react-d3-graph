@@ -91,7 +91,7 @@ function buildLinkPathDefinition(
       // Slope of bottom left edge to top right edge of node (is positive)
       var beta = Math.atan(targetHeight / targetWidth);
       // Decrease percent
-      var percentThreshold = 0.8;
+      var percentThreshold = 0.9;
       // Change x and y to be the edge of the target
       if (alpha > -beta && alpha <= beta) {
         // Left or right edge of target
