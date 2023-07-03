@@ -155,7 +155,6 @@ export default class Node extends React.Component {
       cy: this.props.cy,
       id: this.props.id,
       transform: `translate(${gtx},${gty})`,
-      name: this.props.name,
     };
 
     return (
