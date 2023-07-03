@@ -91,14 +91,14 @@ function buildLinkPathDefinition(
       // Slope of bottom left edge to top right edge of node (is positive)
       var beta = Math.atan(targetHeight / targetWidth);
       // Decrease percent
-      var percentThreshold = 0.9;
+      var threshold = 4;
       // Change x and y to be the edge of the target
       if (alpha > -beta && alpha <= beta) {
         // Left or right edge of target
         // Calculate sign of x - px
         var sign = Math.sign(x - px);
-        var widthPercent = (targetWidth / 2 / (x - px)) * percentThreshold;
-        var xNew = x - sign * (x - px) * widthPercent;
+        var widthPercent = targetWidth / 2 / (x - px);
+        var xNew = x - sign * (x - px) * widthPercent + sign * threshold;
         x = xNew;
         var yNew = y - sign * (y - py) * widthPercent;
         y = yNew;
@@ -106,10 +106,10 @@ function buildLinkPathDefinition(
         // Top or bottom edge of target
         // Calculate sign of y - py
         var sign = Math.sign(y - py);
-        var heightPercent = (targetHeight / 2 / (y - py)) * percentThreshold;
+        var heightPercent = targetHeight / 2 / (y - py);
         var xNew = x - sign * (x - px) * heightPercent;
         x = xNew;
-        var yNew = y - sign * (y - py) * heightPercent;
+        var yNew = y - sign * (y - py) * heightPercent + sign * threshold;
         y = yNew;
       }
       return ` A${radius},${radius} 0 0,1 ${x},${y}`;

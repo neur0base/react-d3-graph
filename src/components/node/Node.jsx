@@ -105,8 +105,8 @@ export default class Node extends React.Component {
       node = null;
 
     if (this.props.svg || this.props.viewGenerator) {
-      const height = isSizeNumericalValue ? size / 10 : size.height / 10;
-      const width = isSizeNumericalValue ? size / 10 : size.width / 10;
+      const height = isSizeNumericalValue ? size / 5 : size.height / 5;
+      const width = isSizeNumericalValue ? size / 5 : size.width / 5;
       const tx = width / 2;
       const ty = height / 2;
       const transform = `translate(${tx},${ty})`;
