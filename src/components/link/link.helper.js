@@ -85,32 +85,34 @@ function buildLinkPathDefinition(
     .map(({ x, y }, i) => {
       const { x: px, y: py } = i > 0 ? restOfLinkPoints[i - 1] : sourceCoords;
       const radius = calcRadiusFn(px, py, x, y);
-
-      // Slope of the link line
-      var alpha = Math.atan((y - py) / (x - px));
-      // Slope of bottom left edge to top right edge of node (is positive)
-      var beta = Math.atan(targetHeight / targetWidth);
-      // Decrease percent
-      var threshold = 8;
-      // Change x and y to be the edge of the target
-      if (alpha > -beta && alpha <= beta) {
-        // Left or right edge of target
-        // Calculate sign of x - px
-        var sign = Math.sign(x - px);
-        var widthPercent = targetWidth / 2 / (x - px);
-        var xNew = x - sign * (x - px) * widthPercent + sign * threshold;
-        x = xNew;
-        var yNew = y - sign * (y - py) * widthPercent;
-        y = yNew;
-      } else {
-        // Top or bottom edge of target
-        // Calculate sign of y - py
-        var sign = Math.sign(y - py);
-        var heightPercent = targetHeight / 2 / (y - py);
-        var xNew = x - sign * (x - px) * heightPercent;
-        x = xNew;
-        var yNew = y - sign * (y - py) * heightPercent + sign * threshold;
-        y = yNew;
+      // Check if i is the last point
+      if (i === restOfLinkPoints.length - 1) {
+        // Slope of the link line
+        var alpha = Math.atan((y - py) / (x - px));
+        // Slope of bottom left edge to top right edge of node (is positive)
+        var beta = Math.atan(targetHeight / targetWidth);
+        // Decrease percent
+        var threshold = 8;
+        // Change x and y to be the edge of the target
+        if (alpha > -beta && alpha <= beta) {
+          // Left or right edge of target
+          // Calculate sign of x - px
+          var sign = Math.sign(x - px);
+          var widthPercent = targetWidth / 2 / (x - px);
+          var xNew = x - sign * (x - px) * widthPercent + sign * threshold;
+          x = xNew;
+          var yNew = y - sign * (y - py) * widthPercent;
+          y = yNew;
+        } else {
+          // Top or bottom edge of target
+          // Calculate sign of y - py
+          var sign = Math.sign(y - py);
+          var heightPercent = targetHeight / 2 / (y - py);
+          var xNew = x - sign * (x - px) * heightPercent;
+          x = xNew;
+          var yNew = y - sign * (y - py) * heightPercent + sign * threshold;
+          y = yNew;
+        }
       }
       return ` A${radius},${radius} 0 0,1 ${x},${y}`;
     })
